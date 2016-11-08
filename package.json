@@ -26,5 +26,17 @@
   "license": "MIT",
   "dependencies": {
     "assertion-error": "^1.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cupools/option-lint.git"
+  },
+  "keywords": [
+    "validator",
+    "lint"
+  ],
+  "bugs": {
+    "url": "https://github.com/cupools/option-lint/issues"
+  },
+  "homepage": "https://github.com/cupools/option-lint#readme"
 }
