@@ -1,7 +1,9 @@
-export default function typeOf(expected, actual) {
-  let type = Object.prototype.toString.call(actual)
+export default function typeOf(decl, obj) {
+  let type = Object.prototype.toString.call(obj)
+  let expectTypes = [].concat(decl)
+
   this.assert(
-    !Array.includes([].concat(expected), type),
-    JSON.stringify(actual) + ' should be type of ' + JSON.stringify(expected.join(', '))
+    !Array.includes(expectTypes, type),
+    JSON.stringify(obj) + ' should be type of ' + JSON.stringify(expectTypes.join(', '))
   )
 }
