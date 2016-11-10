@@ -1,5 +1,5 @@
 import Detect from './detect'
-import typeOf from './assert/typeOf'
+import typeOf from './rule/typeOf'
 
 function process(detect, suit, obj) {
   Object.keys(suit).forEach(key => {
