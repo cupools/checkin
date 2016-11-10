@@ -1,5 +1,7 @@
 import Detect from './detect'
-import typeOf from './rule/typeOf'
+import * as defaultRule from './rule/index'
+
+let extendRule = {}
 
 function process(detect, suit, obj) {
   Object.keys(suit).forEach(key => {
@@ -11,9 +13,23 @@ function process(detect, suit, obj) {
   return true
 }
 
-export default function lint(obj, suit) {
-  let detect = Detect
-    .addRule('typeOf', typeOf)
+function lint(obj, suit) {
+  let combine = { ...defaultRule, ...extendRule }
+  let detect = Object.keys(combine).reduce(
+    (ret, key) => ret.addRule(key, combine[key]),
+    Detect
+  )
 
   return process(detect, suit, obj)
 }
+
+export const wrap = function (extend) {
+  return (obj, suit) => lint(obj, Object.assign({}, extend, suit))
+}
+
+export const addRule = function (name, assert) {
+  extendRule[name] = assert
+  return lint
+}
+
+export default lint
