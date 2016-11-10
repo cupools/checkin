@@ -1,14 +1,24 @@
 /* eslint-env mocha */
-import Chai from 'chai'
+import Chai, { expect } from 'chai'
+import AssertionError from 'assertion-error'
 import optionLint from '../src/index'
 
 Chai.should()
 
 describe('index', function () {
   it('should work', function () {
-    let suit = {
-      a: { typeOf: 'string' }
-    }
-    optionLint({ a: '000' }, suit).should.equal(true)
+    let obj = { a: '0' }
+
+    expect(
+      optionLint(obj, {
+        a: { typeOf: 'string' }
+      })
+    ).to.equal(true)
+
+    expect(
+      optionLint.bind(null, obj, {
+        a: { typeOf: 'number' }
+      })
+    ).to.not.throw(AssertionError)
   })
 })
