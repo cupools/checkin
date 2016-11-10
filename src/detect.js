@@ -1,9 +1,20 @@
 import Assert from 'assert'
 
 const context = { assert: Assert.ok }
-let rules = {}
 
-function detect(suit, obj) {
+class Detect {
+  constructor(rules) {
+    this.rules = rules
+  }
+  detect(suit, obj) {
+    return detect.call(null, this.rules, suit, obj) && this
+  }
+  addRule(name, assert) {
+    return new Detect({ ...this.rules, [name]: assert })
+  }
+}
+
+function detect(rules, suit, obj) {
   Object.keys(suit).forEach(ruleName => {
     let condition = suit[ruleName]
     let rule = rules[ruleName]
@@ -14,11 +25,7 @@ function detect(suit, obj) {
       console.log('rule `%s` not found', ruleName)
     }
   })
+  return true
 }
 
-detect.addRule = function (name, assert) {
-  rules[name] = assert
-  return detect
-}
-
-export default detect
+export default new Detect()

@@ -1,20 +1,19 @@
-import detect from './detect'
+import Detect from './detect'
 import typeOf from './assert/typeOf'
 
-function lint(obj, suit) {
-  detect.addRule('typeOf', typeOf)
-
+function process(detect, suit, obj) {
   Object.keys(suit).forEach(key => {
     let rules = suit[key]
     let target = obj[key]
-    detect(rules, target)
+    detect.detect(rules, target)
   })
 
   return true
 }
 
-lint.wrap = function (extend) {
-  return (obj, suit) => lint(obj, { ...extend, ...suit })
-}
+export default function lint(obj, suit) {
+  let detect = Detect
+    .addRule('typeOf', typeOf)
 
-export default lint
+  return process(detect, suit, obj)
+}
