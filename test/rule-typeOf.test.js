@@ -14,6 +14,7 @@ describe('rule - typeOf', function () {
     expect(typeOf.bind(context, 'number', NaN)).to.not.throw()
     expect(typeOf.bind(context, 'null', null)).to.not.throw()
     expect(typeOf.bind(context, 'undefined', undefined)).to.not.throw()
+    expect(typeOf.bind(context, ['number', 'string'], '0')).to.not.throw()
   })
 
   it('should throw AssertionError', function () {
