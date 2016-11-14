@@ -1,5 +1,5 @@
 {
-  "name": "option-lint",
+  "name": "proof",
   "version": "0.0.1",
   "description": "Lint option and merge with default value",
   "main": "index.js",
@@ -28,14 +28,14 @@
   "dependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cupools/option-lint.git"
+    "url": "git+https://github.com/cupools/proof.git"
   },
   "keywords": [
     "validator",
     "lint"
   ],
   "bugs": {
-    "url": "https://github.com/cupools/option-lint/issues"
+    "url": "https://github.com/cupools/proof/issues"
   },
-  "homepage": "https://github.com/cupools/option-lint#readme"
+  "homepage": "https://github.com/cupools/proof#readme"
 }
