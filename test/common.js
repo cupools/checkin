@@ -5,4 +5,4 @@ import assert from 'assert'
 Chai.should()
 
 export { AssertionError }
-export const context = { assert: assert.ok }
+export const context = { assert: assert.ok, set: () => {} }

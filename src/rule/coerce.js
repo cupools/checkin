@@ -1,3 +1,5 @@
 export default function coerce(fn, val) {
-  return fn(val)
+  if (val !== undefined) {
+    this.set(fn(val))
+  }
 }
