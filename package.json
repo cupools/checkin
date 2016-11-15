@@ -26,6 +26,7 @@
   "author": "liyh <cupools@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "deep-eql": "^2.0.1",
     "lodash.sortby": "^4.7.0"
   },
   "repository": {

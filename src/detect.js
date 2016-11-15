@@ -14,7 +14,6 @@ class Detect {
 }
 
 function detect(rules, suit, val) {
-  console.log(suit, val)
   return Object.keys(suit).reduce(
     (ret, ruleName) => {
       let condition = suit[ruleName]
