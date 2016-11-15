@@ -25,7 +25,9 @@
   },
   "author": "liyh <cupools@gmail.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "lodash.sortby": "^4.7.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cupools/proof.git"

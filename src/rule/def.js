@@ -3,3 +3,5 @@ export default function def(expected, val) {
     this.set(expected)
   }
 }
+
+def.__order__ = 1e5
