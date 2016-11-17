@@ -1,3 +1,5 @@
+import merge from 'lodash.merge'
+
 import Detect from './detect'
 import * as defaultRule from './rule/index'
 
@@ -38,12 +40,12 @@ function proof(obj, suit) {
   return process(detect, suit, obj)
 }
 
-export const addRule = function (name, assert) {
+proof.addRule = function (name, assert) {
   extendRule[name] = assert
   return proof
 }
 
-export const p = function (...args) {
+proof.p = function (...args) {
   return new Promise(
     (resolve, reject) => {
       try {
@@ -56,8 +58,8 @@ export const p = function (...args) {
   )
 }
 
-export const wrap = function (extend) {
-  return (obj, suit) => proof(obj, Object.assign({}, extend, suit))
+proof.wrap = function (extend) {
+  return (obj, suit) => proof(obj, merge(extend, suit))
 }
 
 export default proof
