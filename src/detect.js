@@ -2,7 +2,7 @@ import Assert from 'assert'
 import sortBy from 'lodash.sortby'
 
 class Detect {
-  constructor(rules) {
+  constructor(rules = {}) {
     this.rules = rules
   }
   detect(suit, val) {

@@ -1,6 +1,6 @@
 export default function satisfy(fn, val) {
-  this.asset(
+  this.assert(
     fn(val),
-    JSON.stringify(val) + ' should be satify to ' + JSON.stringify(fn)
+    JSON.stringify(val) + ' should be satify to given function'
   )
 }

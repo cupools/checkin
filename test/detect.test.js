@@ -1,9 +1,8 @@
 /* eslint-env mocha */
-import Chai, { expect } from 'chai'
+import { expect } from 'chai'
+import './common'
 import Detect from '../src/detect'
 import * as defaultRule from '../src/rule/index'
-
-Chai.should()
 
 describe('detect', function () {
   it('should work', function () {
@@ -22,5 +21,11 @@ describe('detect', function () {
     expect(
       detect(undefined)
     ).to.equal(2)
+  })
+
+  it('should given warning when miss rule', function () {
+    expect(
+      Detect.detect({ equal: 2 }, 1)
+    ).to.eql(1)
   })
 })

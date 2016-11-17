@@ -1,9 +1,7 @@
 /* eslint-env mocha */
-import Chai, { expect } from 'chai'
-import AssertionError from 'assertion-error'
+import { expect } from 'chai'
+import './common'
 import proof from '../src/index'
-
-Chai.should()
 
 describe('index', function () {
   it('should work', function () {
@@ -19,6 +17,6 @@ describe('index', function () {
       proof.bind(null, obj, {
         a: { typeOf: 'number' }
       })
-    ).to.not.throw(AssertionError)
+    ).to.throw(/AssertionError/)
   })
 })
