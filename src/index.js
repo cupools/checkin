@@ -21,7 +21,7 @@ function process(detect, suit, obj) {
         ...ret,
         [key]: detect.detect(rules, target)
       }
-    }, {})
+    }, obj)
 }
 
 /**

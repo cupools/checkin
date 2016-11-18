@@ -20,6 +20,16 @@ describe('index', function () {
     ).to.throw(/AssertionError/)
   })
 
+  it('should reserve origin keys miss in suit', function () {
+    let obj = { a: '0', b: 1 }
+
+    expect(
+      proof(obj, {
+        a: { typeOf: 'string' }
+      })
+    ).to.eql(obj)
+  })
+
   it('addRule should works', function () {
     let obj = { a: 1 }
 
