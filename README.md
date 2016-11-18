@@ -7,7 +7,7 @@ Lint option and merge with default value
 - [x] Basic function
 - [x] Extensible rule support
 - [ ] More
-- [ ] Test coverage
+- [x] Test coverage
 - [ ] Documentation
 
 ## Getting Started
