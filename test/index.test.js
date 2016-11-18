@@ -42,17 +42,15 @@ describe('index', function () {
     ).to.eql({ a: 2 })
   })
 
-  it('p should works', function(done) {
+  it('peace should works', function() {
     let obj = { a: 1 }
 
-    proof.p(obj, { a: { typeOf: 'number' } }).then(ret => {
-      expect(ret).to.eql(obj)
-      done()
-    })
+    expect(
+      proof.peace(obj, { a: { typeOf: 'number' } })
+    ).to.eql(obj)
 
-    proof.p(obj, { a: { typeOf: 'string' } }).catch(e => {
-      expect(e).to.be.an('error')
-      done()
-    })
+    expect(
+      proof.peace(obj, { a: { typeOf: 'string' } })
+    ).to.have.property('isError')
   })
 })

@@ -45,17 +45,15 @@ proof.addRule = function (name, assert) {
   return proof
 }
 
-proof.p = function (...args) {
-  return new Promise(
-    (resolve, reject) => {
-      try {
-        let ret = proof.apply(null, args)
-        resolve(ret)
-      } catch (e) {
-        reject(e)
-      }
+proof.peace = function (...args) {
+  try {
+    return proof.apply(null, args)
+  } catch (e) {
+    return {
+      ...e,
+      isError: true
     }
-  )
+  }
 }
 
 proof.wrap = function (extend) {
