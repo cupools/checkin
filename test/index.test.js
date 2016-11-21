@@ -52,6 +52,16 @@ describe('index', function () {
     ).to.eql({ a: 2 })
   })
 
+  it('assert should works', function() {
+    expect(
+      proof.assert(1, { typeOf: 'number' })
+    ).to.equal(1)
+
+    expect(
+      proof.assert.bind(proof, 1, { typeOf: 'string' })
+    ).to.throw(/AssertionError/)
+  })
+
   it('peace should works', function() {
     let obj = { a: 1 }
 

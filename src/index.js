@@ -15,8 +15,8 @@ let extendRule = {}
 function process(detect, suit, obj) {
   return Object.keys(suit).reduce(
     (ret, key) => {
-      let rules = suit[key]
-      let target = obj[key]
+      const rules = suit[key]
+      const target = obj[key]
       return {
         ...ret,
         [key]: detect.detect(rules, target)
@@ -31,8 +31,8 @@ function process(detect, suit, obj) {
  * @return {Object}      option that has been proofed
  */
 function proof(obj, suit) {
-  let combine = { ...defaultRule, ...extendRule }
-  let detect = Object.keys(combine).reduce(
+  const combine = { ...defaultRule, ...extendRule }
+  const detect = Object.keys(combine).reduce(
     (ret, key) => ret.addRule(key, combine[key]),
     Detect
   )
@@ -54,6 +54,16 @@ proof.peace = function (...args) {
       isError: true
     }
   }
+}
+
+proof.assert = function (target, rules) {
+  const combine = { ...defaultRule, ...extendRule }
+  const detect = Object.keys(combine).reduce(
+    (ret, key) => ret.addRule(key, combine[key]),
+    Detect
+  )
+
+  return detect.detect(rules, target)
 }
 
 proof.wrap = function (extend) {
