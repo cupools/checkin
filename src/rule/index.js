@@ -7,3 +7,4 @@ export { default as satisfy } from './satisfy'
 
 export { default as coerce } from './coerce'
 export { default as def } from './def'
+export { default as default } from './def'

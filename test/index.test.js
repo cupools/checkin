@@ -18,6 +18,12 @@ describe('index', function () {
         a: { typeOf: 'number' }
       })
     ).to.throw(/AssertionError/)
+
+    expect(
+      proof({}, {
+        a: { default: 1 }
+      })
+    ).to.eql({ a: 1 })
   })
 
   it('should reserve origin keys miss in suit', function () {

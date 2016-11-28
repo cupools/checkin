@@ -16,9 +16,9 @@ class Detect {
 function detect(rules, suit, val) {
   return Object.keys(suit).reduce(
     (ret, ruleName) => {
-      let condition = suit[ruleName]
-      let rule = rules[ruleName]
-      let rewrite = newVal => (ret = newVal)
+      const condition = suit[ruleName]
+      const rule = rules[ruleName]
+      const rewrite = newVal => (ret = newVal)
 
       if (rule) {
         rule.call({ assert: Assert.ok, set: rewrite }, condition, ret)
@@ -33,7 +33,7 @@ function detect(rules, suit, val) {
 }
 
 function sort(rules, suit) {
-  let orderKey = sortBy(
+  const orderKey = sortBy(
     Object.keys(suit),
     key => rules[key] ? ((0 - rules[key].__order__) || 0) : 0
   )
