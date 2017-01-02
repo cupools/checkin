@@ -3,23 +3,23 @@ import merge from 'lodash.merge'
 import Detect from './detect'
 import * as defaultRule from './rule/index'
 
+// eslint-disable-next-line prefer-const
 let extendRule = {}
 
 /**
  * go through all rules
  * @param  {Detect} detect detect instance
  * @param  {Object} suit   rule suit
- * @param  {Object} obj    key:value to be proof
- * @return {Object}        key:value that has bee proofed
+ * @param  {Object} obj    obj to be proof
+ * @return {Object}        obj that has bee proofed
  */
 function process(detect, suit, obj) {
   return Object.keys(suit).reduce(
     (ret, key) => {
       const rules = suit[key]
-      const target = obj[key]
       return {
         ...ret,
-        [key]: detect.detect(rules, target)
+        [key]: detect.detect(rules, key, obj[key])
       }
     }, obj)
 }
@@ -40,14 +40,14 @@ function proof(obj, suit) {
   return process(detect, suit, obj)
 }
 
-proof.addRule = function (name, assert) {
+proof.addRule = function addRule(name, assert) {
   extendRule[name] = assert
   return proof
 }
 
-proof.peace = function (...args) {
+proof.peace = function peace(...args) {
   try {
-    return proof.apply(null, args)
+    return proof.call(null, ...args)
   } catch (e) {
     return {
       ...e,
@@ -56,7 +56,7 @@ proof.peace = function (...args) {
   }
 }
 
-proof.assert = function (target, rules) {
+proof.assert = function assert(target, rules) {
   const combine = { ...defaultRule, ...extendRule }
   const detect = Object.keys(combine).reduce(
     (ret, key) => ret.addRule(key, combine[key]),
@@ -66,7 +66,7 @@ proof.assert = function (target, rules) {
   return detect.detect(rules, target)
 }
 
-proof.wrap = function (extend) {
+proof.wrap = function wrap(extend) {
   return (obj, suit) => proof(obj, merge(extend, suit))
 }
 

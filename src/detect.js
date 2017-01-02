@@ -1,32 +1,32 @@
-import Assert from 'assert'
 import sortBy from 'lodash.sortby'
+import Rule from './rule'
 
 class Detect {
   constructor(rules = {}) {
     this.rules = rules
   }
-  detect(suit, val) {
-    return detect.call(null, this.rules, sort(this.rules, suit), val)
+  detect(key, suit, val) {
+    return detect.call(null, this.rules, key, sort(this.rules, suit), val)
   }
   addRule(name, assert) {
     return new Detect({ ...this.rules, [name]: assert })
   }
 }
 
-function detect(rules, suit, val) {
+function detect(rules, key, suit, val) {
   return Object.keys(suit).reduce(
     (ret, ruleName) => {
       const condition = suit[ruleName]
       const rule = rules[ruleName]
-      const rewrite = newVal => (ret = newVal)
 
-      if (rule) {
-        rule.call({ assert: Assert.ok, set: rewrite }, condition, ret)
-      } else {
-        console.log('rule `%s` not found', ruleName)
+      if (!rule) {
+        return ret
       }
 
-      return ret
+      const context = new Rule({ key, val: ret })
+      rule.call(context, condition, ret)
+
+      return context.params.val
     },
     val
   )
@@ -35,7 +35,7 @@ function detect(rules, suit, val) {
 function sort(rules, suit) {
   const orderKey = sortBy(
     Object.keys(suit),
-    key => rules[key] ? ((0 - rules[key].__order__) || 0) : 0
+    key => (rules[key] && rules[key].__order__ ? -rules[key].__order__ : 0)
   )
   return orderKey.reduce(
     (ret, key) => Object.assign({}, ret, { [key]: suit[key] }),
