@@ -16,11 +16,14 @@ export default class Rule {
     if (expr) {
       return
     }
-    throw this.generateError(this.params)
+    throw generateError(this.params)
   }
-  generateError(params) {
-    const { key, val, expected, operate, showDiff } = params
-    const message = `expected [${key}] to ${operate} ${format(expected)} ${showDiff ? 'but get ' + format(val) : ''}`
-    return new AssertionError(message)
-  }
+}
+
+function generateError(params) {
+  const { key, val, expected, operate, showDiff } = params
+  const expectedMsg = expected !== undefined ? ' ' + format(expected) : ''
+  const diffMsg = showDiff ? ' but get ' + format(val) : ''
+  const message = `expected ${key} to ${operate}` + expectedMsg + diffMsg
+  return new AssertionError(message)
 }

@@ -4,7 +4,7 @@ import './common'
 import Detect from '../src/detect'
 import * as defaultRule from '../src/rule/index'
 
-describe.only('detect', () => {
+describe('detect', () => {
   it('should work', () => {
     const wrap = Detect.addRule('coerce', defaultRule.coerce)
     const detect = wrap.detect.bind(wrap, 'key', { coerce: val => val + 1 })
@@ -21,5 +21,14 @@ describe.only('detect', () => {
     expect(
       detect(undefined)
     ).to.equal(2)
+  })
+
+  it('should work with unexist rule', () => {
+    const wrap = Detect
+    const detect = wrap.detect.bind(wrap, 'key', { coerce: () => 1 })
+
+    expect(
+      detect(0)
+    ).to.equal(0)
   })
 })

@@ -1,8 +1,6 @@
-export default function typeOf(decl, val) {
-  if (decl) {
-    this.assert(
-      val != null,
-      JSON.stringify(val) + ' should not be ignore'
-    )
+export default function required(expr, val) {
+  if (expr) {
+    this.params.operate = 'to be required'
+    this.assert(val !== undefined)
   }
 }

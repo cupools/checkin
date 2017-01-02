@@ -1,14 +1,9 @@
 import Chai from 'chai'
-import AssertionError from 'assertion-error'
-import assert from 'assert'
+import Rule from '../src/rule'
 
 Chai.should()
 
-export { AssertionError }
-export const context = {
-  __newVal__: null,
-  assert: assert.ok,
-  set: function(val) {
-    this.__newVal__ = val
-  }
+export const generateArgs = (key, expr, val) => {
+  const context = new Rule({ key, val })
+  return [context, expr, val]
 }

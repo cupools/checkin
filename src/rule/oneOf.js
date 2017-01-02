@@ -1,8 +1,8 @@
-export default function typeOf(decl, val) {
-  let expected = [].concat(decl)
-
+export default function typeOf(expr, val) {
+  const expected = [].concat(expr)
+  this.params.operate = 'to be one of'
+  this.params.expected = expr
   this.assert(
-    Array.includes(expected, val),
-    JSON.stringify(val) + ' should be one of ' + JSON.stringify(expected.join(', '))
+    Array.includes(expected, val)
   )
 }

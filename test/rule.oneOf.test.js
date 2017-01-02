@@ -1,19 +1,19 @@
 /* eslint-env mocha */
 import { expect } from 'chai'
-import { context } from './common'
+import { generateArgs } from './common'
 
 import oneOf from '../src/rule/oneOf'
 
-describe('rule - oneOf', function () {
-  it('should work', function () {
-    expect(oneOf.bind(context, [0, 1], 0)).to.not.throw()
-    expect(oneOf.bind(context, [1, 0], 0)).to.not.throw()
-    expect(oneOf.bind(context, 0, 0)).to.not.throw()
+describe('rule - oneOf', () => {
+  it('should work', () => {
+    expect(oneOf.bind(...generateArgs('key', [0, 1], 0))).to.not.throw()
+    expect(oneOf.bind(...generateArgs('key', [1, 0], 0))).to.not.throw()
+    expect(oneOf.bind(...generateArgs('key', 0, 0))).to.not.throw()
   })
 
-  it('should throw AssertionError', function () {
-    expect(oneOf.bind(context, [0, 1], '0')).to.throw(/AssertionError/)
-    expect(oneOf.bind(context, [1], 0)).to.throw(/AssertionError/)
-    expect(oneOf.bind(context, [], 0)).to.throw(/AssertionError/)
+  it('should throw AssertionError', () => {
+    expect(oneOf.bind(...generateArgs('key', [0, 1], '0'))).to.throw(/AssertionError/)
+    expect(oneOf.bind(...generateArgs('key', [1], 0))).to.throw(/AssertionError/)
+    expect(oneOf.bind(...generateArgs('key', [], 0))).to.throw(/AssertionError/)
   })
 })

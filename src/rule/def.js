@@ -1,6 +1,6 @@
-export default function def(expected, val) {
+export default function def(expr, val) {
   if (val === undefined) {
-    this.params.val = expected
+    this.params.val = expr
   }
 }
 

@@ -1,22 +1,22 @@
 /* eslint-env mocha */
 import { expect } from 'chai'
-import { context } from './common'
+import { generateArgs } from './common'
 
 import required from '../src/rule/required'
 
-describe('rule - required', function () {
-  it('should work', function () {
-    expect(required.bind(context, true, 0)).to.not.throw()
-    expect(required.bind(context, true, '0')).to.not.throw()
-    expect(required.bind(context, true, /0/)).to.not.throw()
-    expect(required.bind(context, true, {})).to.not.throw()
-    expect(required.bind(context, false, 0)).to.not.throw()
-    expect(required.bind(context, false, null)).to.not.throw()
-    expect(required.bind(context, false, undefined)).to.not.throw()
+describe('rule - required', () => {
+  it('should work', () => {
+    expect(required.bind(...generateArgs('key', true, 0))).to.not.throw()
+    expect(required.bind(...generateArgs('key', true, '0'))).to.not.throw()
+    expect(required.bind(...generateArgs('key', true, /0/))).to.not.throw()
+    expect(required.bind(...generateArgs('key', true, {}))).to.not.throw()
+    expect(required.bind(...generateArgs('key', true, null))).to.not.throw()
+    expect(required.bind(...generateArgs('key', false, 0))).to.not.throw()
+    expect(required.bind(...generateArgs('key', false, null))).to.not.throw()
+    expect(required.bind(...generateArgs('key', false, undefined))).to.not.throw()
   })
 
-  it('should throw AssertionError', function () {
-    expect(required.bind(context, true, null)).to.throw(/AssertionError/)
-    expect(required.bind(context, true, undefined)).to.throw(/AssertionError/)
+  it('should throw AssertionError', () => {
+    expect(required.bind(...generateArgs('key', true, undefined))).to.throw(/AssertionError/)
   })
 })

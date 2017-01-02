@@ -16,7 +16,7 @@ class Detect {
 function detect(rules, key, suit, val) {
   return Object.keys(suit).reduce(
     (ret, ruleName) => {
-      const condition = suit[ruleName]
+      const expr = suit[ruleName]
       const rule = rules[ruleName]
 
       if (!rule) {
@@ -24,7 +24,7 @@ function detect(rules, key, suit, val) {
       }
 
       const context = new Rule({ key, val: ret })
-      rule.call(context, condition, ret)
+      rule.call(context, expr, ret)
 
       return context.params.val
     },

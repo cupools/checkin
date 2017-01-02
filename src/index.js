@@ -13,13 +13,13 @@ let extendRule = {}
  * @param  {Object} obj    obj to be proof
  * @return {Object}        obj that has bee proofed
  */
-function process(detect, suit, obj) {
-  return Object.keys(suit).reduce(
+function process(detect, suits, obj) {
+  return Object.keys(suits).reduce(
     (ret, key) => {
-      const rules = suit[key]
+      const suit = suits[key]
       return {
         ...ret,
-        [key]: detect.detect(rules, key, obj[key])
+        [key]: detect.detect(key, suit, obj[key])
       }
     }, obj)
 }
@@ -38,32 +38,6 @@ function proof(obj, suit) {
   )
 
   return process(detect, suit, obj)
-}
-
-proof.addRule = function addRule(name, assert) {
-  extendRule[name] = assert
-  return proof
-}
-
-proof.peace = function peace(...args) {
-  try {
-    return proof.call(null, ...args)
-  } catch (e) {
-    return {
-      ...e,
-      isError: true
-    }
-  }
-}
-
-proof.assert = function assert(target, rules) {
-  const combine = { ...defaultRule, ...extendRule }
-  const detect = Object.keys(combine).reduce(
-    (ret, key) => ret.addRule(key, combine[key]),
-    Detect
-  )
-
-  return detect.detect(rules, target)
 }
 
 proof.wrap = function wrap(extend) {

@@ -1,23 +1,19 @@
 /* eslint-env mocha */
 import { expect } from 'chai'
-import { context } from './common'
+import { generateArgs } from './common'
 
 import def from '../src/rule/def'
 
-describe('rule - def', function () {
-  it('should work', function () {
-    let ctx = null
+describe('rule - def', () => {
+  it('should work', () => {
+    const [context, ...args] = generateArgs('key', 0, undefined)
+    expect(def.bind(context, ...args)).to.not.throw()
+    expect(context.params.val).to.equal(0)
+  })
 
-    ctx = Object.create(context)
-    expect(def.bind(ctx, 0)).to.not.throw()
-    expect(ctx.__newVal__).to.equal(0)
-
-    ctx = Object.create(context)
-    expect(def.bind(ctx, 1)).to.not.throw()
-    expect(ctx.__newVal__).to.equal(1)
-
-    ctx = Object.create(context)
-    expect(def.bind(ctx, 1, 0)).to.not.throw()
-    expect(ctx.__newVal__).to.equal(null)
+  it('should not overwrite value', () => {
+    const [context, ...args] = generateArgs('key', 0, 1)
+    expect(def.bind(context, ...args)).to.not.throw()
+    expect(context.params.val).to.equal(1)
   })
 })
