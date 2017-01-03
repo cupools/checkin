@@ -10,8 +10,8 @@ let extendRule = {}
  * go through all rules
  * @param  {Detect} detect detect instance
  * @param  {Object} suit   rule suit
- * @param  {Object} obj    obj to be proof
- * @return {Object}        obj that has bee proofed
+ * @param  {Object} obj    obj to be checkin
+ * @return {Object}        obj that has been checkined
  */
 function process(detect, suits, obj) {
   return Object.keys(suits).reduce(
@@ -25,12 +25,12 @@ function process(detect, suits, obj) {
 }
 
 /**
- * proof given option
- * @param  {Object} obj  option to be proof
+ * checkin given option
+ * @param  {Object} obj  option to be checkin
  * @param  {Object} suit rule suit
- * @return {Object}      option that has been proofed
+ * @return {Object}      option that has been checkined
  */
-function proof(obj, suit) {
+function checkin(obj, suit) {
   const combine = { ...defaultRule, ...extendRule }
   const detect = Object.keys(combine).reduce(
     (ret, key) => ret.addRule(key, combine[key]),
@@ -40,8 +40,8 @@ function proof(obj, suit) {
   return process(detect, suit, obj)
 }
 
-proof.wrap = function wrap(extend) {
-  return (obj, suit) => proof(obj, merge(extend, suit))
+checkin.wrap = function wrap(extend) {
+  return (obj, suit) => checkin(obj, merge(extend, suit))
 }
 
-export default proof
+export default checkin

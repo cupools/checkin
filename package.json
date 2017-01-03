@@ -1,5 +1,5 @@
 {
-  "name": "proof",
+  "name": "checkin",
   "version": "0.0.1",
   "description": "Lint option and merge with default value",
   "main": "index.js",
@@ -38,14 +38,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cupools/proof.git"
+    "url": "git+https://github.com/cupools/checkin.git"
   },
   "keywords": [
     "validator",
     "lint"
   ],
   "bugs": {
-    "url": "https://github.com/cupools/proof/issues"
+    "url": "https://github.com/cupools/checkin/issues"
   },
-  "homepage": "https://github.com/cupools/proof#readme"
+  "homepage": "https://github.com/cupools/checkin#readme"
 }

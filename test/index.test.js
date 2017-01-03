@@ -1,26 +1,26 @@
 /* eslint-env mocha */
 import { expect } from 'chai'
 import './common'
-import proof from '../src/index'
+import checkin from '../src/index'
 
 describe('index', () => {
   it('should work', () => {
     const obj = { a: '0' }
 
     expect(
-      proof(obj, {
+      checkin(obj, {
         a: { typeOf: 'string' }
       })
     ).to.eql(obj)
 
     expect(
-      proof.bind(null, obj, {
+      checkin.bind(null, obj, {
         a: { typeOf: 'number' }
       })
     ).to.throw(/AssertionError/)
 
     expect(
-      proof({}, {
+      checkin({}, {
         a: { default: 1 }
       })
     ).to.eql({ a: 1 })
@@ -30,7 +30,7 @@ describe('index', () => {
     const obj = { a: '0', b: 1 }
 
     expect(
-      proof(obj, {
+      checkin(obj, {
         a: { typeOf: 'string' }
       })
     ).to.eql(obj)
@@ -40,7 +40,7 @@ describe('index', () => {
     const obj = { a: 1 }
 
     expect(
-      proof.wrap({
+      checkin.wrap({
         a: { equal: 2 }
       })(obj, {
         a: { coerce: val => val + 1 }

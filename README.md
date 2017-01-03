@@ -1,17 +1,17 @@
-## proof
+## checkin
 
-[![Build Status](https://travis-ci.org/cupools/proof.svg?branch=master)](https://travis-ci.org/cupools/proof) [![Coverage Status](https://coveralls.io/repos/github/cupools/proof/badge.svg?branch=master)](https://coveralls.io/github/cupools/proof?branch=master)
+[![Build Status](https://travis-ci.org/cupools/checkin.svg?branch=master)](https://travis-ci.org/cupools/checkin) [![Coverage Status](https://coveralls.io/repos/github/cupools/checkin/badge.svg?branch=master)](https://coveralls.io/github/cupools/checkin?branch=master)
 
 Lint option and merge with default value
 
 ## Getting Started
 
 ```bash
-$ npm install --save-dev proofread
+$ npm install --save-dev checkin
 ```
 
 ```js
-import proof from 'proofread'
+import checkin from 'checkin'
 
 const option = {
   filename: 'test.png',
@@ -38,7 +38,7 @@ const lint = {
   }
 }
 
-const expected = proof(option, lint)
+const expected = checkin(option, lint)
 //=> { filename: 'test.png', size: 20, size: 20, color: 'red' }
 ```
 ## Rules
@@ -54,7 +54,7 @@ const lint = {
     coerce: val => val + 1
   }
 }
-const expected = proof(obj, lint)
+const expected = checkin(obj, lint)
 // => { foo: 2 }
 ```
 
@@ -69,7 +69,7 @@ const lint = {
     default: 1
   }
 }
-const expected = proof(obj, lint)
+const expected = checkin(obj, lint)
 // => { foo: 1 }
 ```
 
@@ -84,7 +84,7 @@ const lint = {
     equal: 1
   }
 }
-const expected = proof(obj, lint)
+const expected = checkin(obj, lint)
 // => { foo: 1 }
 ```
 
@@ -95,7 +95,7 @@ const lint = {
     equal: 2
   }
 }
-const expected = proof(obj, lint)
+const expected = checkin(obj, lint)
 // => throw AssertionError: expected foo to to be equal to 2
 ```
 
@@ -108,7 +108,7 @@ const lint = {
     oneOf: [1, 2]
   }
 }
-const expected = proof(obj, lint)
+const expected = checkin(obj, lint)
 // => { foo: 1 }
 ```
 
@@ -119,7 +119,7 @@ const lint = {
     oneOf: [3]
   }
 }
-const expected = proof(obj, lint)
+const expected = checkin(obj, lint)
 // => throw AssertionError: expected foo to to be one of Array [ 3 ]
 ```
 
@@ -134,7 +134,7 @@ const lint = {
     required: true
   }
 }
-const expected = proof(obj, lint)
+const expected = checkin(obj, lint)
 // => { foo: 1 }
 ```
 
@@ -149,7 +149,7 @@ const lint = {
     satisfy: val => val > 0
   }
 }
-const expected = proof(obj, lint)
+const expected = checkin(obj, lint)
 // => { foo: 1 }
 ```
 
@@ -162,7 +162,7 @@ const lint = {
     typeOf: ['string', 'number']
   }
 }
-const expected = proof(obj, lint)
+const expected = checkin(obj, lint)
 // => { foo: 1 }
 ```
 
@@ -175,7 +175,7 @@ const lint = {
     within: [0, 2]
   }
 }
-const expected = proof(obj, lint)
+const expected = checkin(obj, lint)
 // => { foo: 1 }
 ```
 
