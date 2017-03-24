@@ -35,16 +35,4 @@ describe('index', () => {
       })
     ).to.eql(obj)
   })
-
-  it('wrap should works', () => {
-    const obj = { a: 1 }
-
-    expect(
-      checkin.wrap({
-        a: { equal: 2 }
-      })(obj, {
-        a: { coerce: val => val + 1 }
-      })
-    ).to.eql({ a: 2 })
-  })
 })

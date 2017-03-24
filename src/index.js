@@ -1,5 +1,3 @@
-import merge from 'lodash.merge'
-
 import Detect from './detect'
 import * as defaultRule from './rule/index'
 
@@ -38,10 +36,6 @@ function checkin(obj, suit) {
   )
 
   return process(detect, suit, obj)
-}
-
-checkin.wrap = function wrap(extend) {
-  return (obj, suit) => checkin(obj, merge(extend, suit))
 }
 
 export default checkin
