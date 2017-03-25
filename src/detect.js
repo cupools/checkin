@@ -33,7 +33,7 @@ function detect(rules, key, suit, val) {
 
 function sort(rules, suit) {
   const orderKey = Object.keys(suit).sort(
-    key => (rules[key] && rules[key].__order__ ? -rules[key].__order__ : 1)
+    key => (rules[key] && rules[key].__order__ ? -rules[key].__order__ : 0)
   )
   return orderKey.reduce(
     (ret, key) => Object.assign({}, ret, { [key]: suit[key] }),
