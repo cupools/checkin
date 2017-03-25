@@ -32,11 +32,24 @@ function detect(rules, key, suit, val) {
 }
 
 function sort(rules, suit) {
-  const orderKey = Object.keys(suit).sort(
-    key => (rules[key] && rules[key].__order__ ? -rules[key].__order__ : 0)
+  // Array.prototype.sort is not stable in v8
+  // So we use index to correct the sort result
+  // https://bugs.chromium.org/p/v8/issues/detail?id=90
+  const mirror = Object.keys(suit).reduce(
+    (ret, key, __idx) => ({ ...ret, [key]: { ...suit[key], __idx } }),
+    {}
   )
+  const orderKey = Object.keys(mirror).sort(
+    (a, b) => {
+      const orderA = (rules[a] && rules[a].__order__) || 0
+      const orderB = (rules[b] && rules[b].__order__) || 0
+      console.log(a, orderA, b, orderB)
+      return orderA === orderB ? (mirror[b].__idx - mirror[a].__idx) : (orderB - orderA)
+    }
+  )
+
   return orderKey.reduce(
-    (ret, key) => Object.assign({}, ret, { [key]: suit[key] }),
+    (ret, key) => ({ ...ret, [key]: suit[key] }),
     {}
   )
 }

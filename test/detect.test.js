@@ -15,8 +15,12 @@ describe('detect', () => {
   })
 
   it('should work by correct order', () => {
-    const wrap = Detect.addRule('coerce', defaultRule.coerce).addRule('def', defaultRule.def)
-    const detect = wrap.detect.bind(wrap, 'key', { coerce: val => val + 1, def: 1 })
+    const wrap = Detect
+      .addRule('coerce', defaultRule.coerce)
+      .addRule('def', defaultRule.def)
+      .addRule('typeOf', defaultRule.typeOf)
+      .addRule('oneOf', defaultRule.oneOf)
+    const detect = wrap.detect.bind(wrap, 'key', { coerce: val => val + 1, def: 1, typeOf: 'number', oneOf: [2] })
 
     expect(
       detect(undefined)
