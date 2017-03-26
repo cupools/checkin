@@ -43,7 +43,6 @@ function sort(rules, suit) {
     (a, b) => {
       const orderA = (rules[a] && rules[a].__order__) || 0
       const orderB = (rules[b] && rules[b].__order__) || 0
-      console.log(a, orderA, b, orderB)
       return orderA === orderB ? (mirror[b].__idx - mirror[a].__idx) : (orderB - orderA)
     }
   )

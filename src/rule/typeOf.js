@@ -5,6 +5,6 @@ export default function typeOf(expr, val) {
   this.params.operate = 'be type of ' + expectTypes.map(s => s.replace(/\w/, $1 => $1.toUpperCase())).join(', ')
   this.params.showDiff = true
   this.assert(
-    Array.includes(expectTypes, type)
+    expectTypes.indexOf(type) > -1
   )
 }
