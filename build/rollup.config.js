@@ -4,12 +4,16 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import uglify from 'rollup-plugin-uglify'
 
+import banner from './banner'
+const pkg = require('../package.json')
+
 export default {
   entry: 'src/index.js',
   dest: 'dist/checkin.js',
   sourceMap: path.resolve('dist/checkin.js'),
   moduleName: 'checkin',
   format: 'umd',
+  banner,
   plugins: [
     babel({
       babelrc: false,
@@ -32,6 +36,14 @@ export default {
       include: 'node_modules/**',
       exclude: '**/*.css'
     }),
-    uglify()
+    uglify({
+      output: {
+        comments(node, comment) {
+          const text = comment.value
+          const type = comment.type
+          return type === 'comment2' && text.indexOf(pkg.name) > -1
+        }
+      }
+    })
   ]
 }
